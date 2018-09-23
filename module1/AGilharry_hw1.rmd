@@ -1,0 +1,137 @@
+---
+title: "DATA 608 HW 1"
+author: "Albert Gilharry"
+date: "September 6, 2018"
+output:
+  html_document: default
+  html_notebook: default
+  pdf_document: default
+---
+
+```{r message=FALSE}
+library("dplyr")
+library("ggplot2")
+library("scales")
+```
+
+**Principles of Data Visualization and Introduction to ggplot2**
+
+I have provided you with data about the 5,000 fastest growing companies in the US, as compiled by Inc. magazine. lets read this in:
+
+```{r}
+
+inc <- read.csv("https://raw.githubusercontent.com/charleyferrari/CUNY_DATA_608/master/module1/Data/inc5000_data.csv", header= TRUE)
+
+```
+
+And lets preview this data:
+
+```{r}
+
+head(inc)
+
+```
+```{r}
+
+summary(inc)
+
+```
+
+Think a bit on what these summaries mean. Use the space below to add some more relevant non-visual exploratory information you think helps you understand this data:
+
+```{r}
+# Insert your code here, create more chunks as necessary
+print(paste0("There are ", nrow(inc[!complete.cases(inc),]), " incomplete cases in this data set."))
+```
+
+```{r}
+print(paste0("There are ", length(unique(inc$City)), " cities represented in this data set."))
+```
+
+
+```{r}
+print(paste0("There standard deviation of Growth_Rate is ", round(sd((inc$Growth_Rate)),4), "."))
+```
+
+```{r}
+print(paste0("There standard deviation of Revenue is ", round(sd((inc$Revenue)),4), "."))
+```
+
+
+```{r}
+print(paste0("There standard deviation of Employees is ", round(sd((na.omit(inc$Employees))) ,4), "."))
+```
+
+## Question 1
+
+Create a graph that shows the distribution of companies in the dataset by State (ie how many are in each state). There are a lot of States, so consider which axis you should use. This visualization is ultimately going to be consumed on a 'portrait' oriented screen (ie taller than wide), which should further guide your layout choices.
+
+- I will create a histogram sorted by frequencies of companies in each state. My assumption is that this graphic is primarily intended for business purposes and having it sorted  this way will better inform investment and other business decisions, by highlighting possible saturated markets and identifying possible areas for opportunities.
+
+```{r fig.width=7, fig.height=9}
+
+# Answer Question 1 here
+group_by(inc, State) %>%
+  summarize( count = n() ) %>%
+  arrange(desc(State)) %>%
+  ggplot(aes( x = reorder(State,count), y = count, label = count, fill= State )) + 
+  geom_bar( stat='identity', show.legend = F, fill="#317EAC" ) + 
+  geom_text(size = 3, position = position_stack(vjust = 0.5)) + 
+  labs(title = "Distribution by State", x = "State", y = "Frequency" ) +
+  coord_flip()
+```
+
+## Quesiton 2
+
+Lets dig in on the state with the 3rd most companies in the data set. Imagine you work for the state and are interested in how many people are employed by companies in different industries. Create a plot that shows the average and/or median employment by industry for companies in this state (only use cases with full data, use R's `complete.cases()` function.) In addition to this, your graph should show how variable the ranges are, and you should deal with outliers.
+
+- The results from the previous question showed that the state with the third most companies is NY. I will plot the median because the variable `Employees` has some very large outliers, but is this also the case for NY?
+
+```{r}
+
+complete_cases_ny <- inc[complete.cases(inc),] %>%
+  filter(State == 'NY')  %>%
+  arrange(desc(Employees))
+
+  head(complete_cases_ny)
+```
+
+
+- It turns out that NY has only 2 companies with more 10000 or more employees. I will replace cases with employees greater than 1 standard deviation with the median. These outliers are likely candidates to be removed but there is not sufficient context to justify removing them, so they will remain. This will result in reduced ranges, albeit minimally. Below is a bar chart with error bars attached, depicting the ranges.
+
+```{r}
+  # Answer Question 2 here
+  complete_cases_ny$Employees[complete_cases_ny$Employees > 1*sd(complete_cases_ny$Employees)] <- median(complete_cases_ny$Employees) 
+  complete_cases_ny %>%
+  group_by(Industry) %>%
+  summarize(med = median(Employees), mx = max(Employees), mn = min(Employees), avg = mean(Employees)) %>%
+  ggplot(aes(x = Industry, y = med,  fill=Industry, label = med)) + 
+  geom_bar( stat='identity', show.legend = F ) + 
+  geom_errorbar(aes(ymin = mn, ymax = mx), position = "dodge", width = 0.25) +
+  labs(title = "Employment by Industries: NY", x = "Industry", y = "Median # of Employees" ) + 
+  coord_flip()
+```
+
+
+## Question 3
+
+Now imagine you work for an investor and want to see which industries generate the most revenue per employee. Create a chart that makes this information clear. Once again, the distribution per industry should be shown.
+
+- I will use only complete cases. I wil also use the entire data set, assuming this question is independent of Question 2.
+
+```{r fig.width=8.5, fig.height=9}
+
+# Answer Question 3 here
+revenues <- inc[complete.cases(inc),] %>%
+  group_by(Industry) %>%
+  summarize(RPE = round((sum(Revenue)/sum(Employees))/10000)) 
+  
+  ggplot(revenues, aes(x = reorder(Industry,RPE), y = RPE,  fill=Industry, label = RPE)) + 
+  geom_bar( stat='identity', show.legend = F, fill="#065d06" ) + 
+  #scale_y_continuous(labels=dollar_format(suffix="0K")) +
+  labs(title = "Revenue Per Employee", x = "Industry", y = "Revenue Per Employee (Ten Thousands)" ) +
+  geom_text(data = revenues, size = 3, vjust = 0.5, color = "#000000", hjust=-0.1, label = dollar(revenues$RPE), fontface = 2 ) + 
+  coord_flip()
+
+```
+

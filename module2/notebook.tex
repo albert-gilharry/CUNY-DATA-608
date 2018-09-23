@@ -1,0 +1,809 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Module2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{k+kn}{import} \PY{n+nn}{datashader} \PY{k}{as} \PY{n+nn}{ds}
+          \PY{k+kn}{import} \PY{n+nn}{datashader}\PY{n+nn}{.}\PY{n+nn}{transfer\PYZus{}functions} \PY{k}{as} \PY{n+nn}{tf}
+          \PY{k+kn}{import} \PY{n+nn}{datashader}\PY{n+nn}{.}\PY{n+nn}{glyphs}
+          \PY{k+kn}{from} \PY{n+nn}{datashader} \PY{k}{import} \PY{n}{reductions}
+          \PY{k+kn}{from} \PY{n+nn}{datashader}\PY{n+nn}{.}\PY{n+nn}{core} \PY{k}{import} \PY{n}{bypixel}
+          \PY{k+kn}{from} \PY{n+nn}{datashader}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{lnglat\PYZus{}to\PYZus{}meters} \PY{k}{as} \PY{n}{webm}\PY{p}{,} \PY{n}{export\PYZus{}image}
+          \PY{k+kn}{from} \PY{n+nn}{datashader}\PY{n+nn}{.}\PY{n+nn}{colors} \PY{k}{import} \PY{n}{colormap\PYZus{}select}\PY{p}{,} \PY{n}{Greys9}\PY{p}{,} \PY{n}{viridis}\PY{p}{,} \PY{n}{inferno}
+          \PY{k+kn}{import} \PY{n+nn}{copy}
+          
+          
+          \PY{k+kn}{from} \PY{n+nn}{pyproj} \PY{k}{import} \PY{n}{Proj}\PY{p}{,} \PY{n}{transform}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{urllib}
+          \PY{k+kn}{import} \PY{n+nn}{json}
+          \PY{k+kn}{import} \PY{n+nn}{datetime}
+          \PY{k+kn}{import} \PY{n+nn}{colorlover} \PY{k}{as} \PY{n+nn}{cl}
+          
+          \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{plotly} \PY{k}{as} \PY{n+nn}{py}
+          \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+          \PY{k+kn}{from} \PY{n+nn}{plotly} \PY{k}{import} \PY{n}{tools}
+          
+          \PY{k+kn}{from} \PY{n+nn}{shapely}\PY{n+nn}{.}\PY{n+nn}{geometry} \PY{k}{import} \PY{n}{Point}\PY{p}{,} \PY{n}{Polygon}\PY{p}{,} \PY{n}{shape}
+          \PY{c+c1}{\PYZsh{} In order to get shapley, you\PYZsq{}ll need to run [pip install shapely.geometry] from your terminal}
+          
+          \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{partial}
+          
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{GeoJSON}
+\end{Verbatim}
+
+
+    For module 2 we'll be looking at techniques for dealing with big data.
+In particular binning strategies and the datashader library (which
+possibly proves we'll never need to bin large data for visualization
+ever again.)
+
+To demonstrate these concepts we'll be looking at the PLUTO dataset put
+out by New York City's department of city planning. PLUTO contains data
+about every tax lot in New York City.
+
+PLUTO data can be downloaded from
+\href{https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-pluto-mappluto.page}{here}.
+Unzip them to the same directory as this notebook, and you should be
+able to read them in using this (or very similar) code. Also take note
+of the data dictionary, it'll come in handy for this assignment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{bk} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PLUTO18v1/BK\PYZus{}18v1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{bx} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PLUTO18v1/BX\PYZus{}18v1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{mn} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PLUTO18v1/MN\PYZus{}18v1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{qn} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PLUTO18v1/QN\PYZus{}18v1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{si} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PLUTO18v1/SI\PYZus{}18v1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          
+          \PY{n}{ny} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{bk}\PY{p}{,} \PY{n}{bx}\PY{p}{,} \PY{n}{mn}\PY{p}{,} \PY{n}{qn}\PY{p}{,} \PY{n}{si}\PY{p}{]}\PY{p}{,} \PY{n}{ignore\PYZus{}index}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sort}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Getting rid of some outliers}
+          \PY{n}{ny} \PY{o}{=} \PY{n}{ny}\PY{p}{[}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1850}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2020}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    I'll also do some prep for the geographic component of this data, which
+we'll be relying on for datashader.
+
+You're not required to know how I'm retrieving the lattitude and
+longitude here, but for those interested: this dataset uses a flat x-y
+projection (assuming for a small enough area that the world is flat for
+easier calculations), and this needs to be projected back to traditional
+lattitude and longitude.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{wgs84} \PY{o}{=} \PY{n}{Proj}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+proj=longlat +ellps=GRS80 +datum=NAD83 +no\PYZus{}defs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{nyli} \PY{o}{=} \PY{n}{Proj}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+proj=lcc +lat\PYZus{}1=40.66666666666666 +lat\PYZus{}2=41.03333333333333 +lat\PYZus{}0=40.16666666666666 +lon\PYZus{}0=\PYZhy{}74 +x\PYZus{}0=300000 +y\PYZus{}0=0 +ellps=GRS80 +datum=NAD83 +to\PYZus{}meter=0.3048006096012192 +no\PYZus{}defs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{XCoord}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.3048}\PY{o}{*}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{XCoord}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YCoord}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.3048}\PY{o}{*}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YCoord}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{transform}\PY{p}{(}\PY{n}{nyli}\PY{p}{,} \PY{n}{wgs84}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{XCoord}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YCoord}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          
+          \PY{n}{ny} \PY{o}{=} \PY{n}{ny}\PY{p}{[}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{60}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}Defining some helper functions for DataShader}
+          \PY{n}{background} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n}{export} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{export\PYZus{}image}\PY{p}{,} \PY{n}{background} \PY{o}{=} \PY{n}{background}\PY{p}{,} \PY{n}{export\PYZus{}path}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{export}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{cm} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{colormap\PYZus{}select}\PY{p}{,} \PY{n}{reverse}\PY{o}{=}\PY{p}{(}\PY{n}{background}\PY{o}{!=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Part 1: Binning and
+Aggregation}\label{part-1-binning-and-aggregation}
+
+Binning is a common strategy for visualizing large datasets. Binning is
+inherent to a few types of visualizations, such as histograms and
+\href{https://plot.ly/python/2D-Histogram/}{2D histograms} (also check
+out their close relatives:
+\href{https://plot.ly/python/2d-density-plots/}{2D density plots} and
+the more general form:
+\href{https://plot.ly/python/heatmaps/}{heatmaps}.
+
+While these visualization types explicitly include binning, any type of
+visualization used with aggregated data can be looked at in the same
+way. For example, lets say we wanted to look at building construction
+over time. This would be best viewed as a line graph, but we can still
+think of our results as being binned by year:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{tools}\PY{o}{.}\PY{n}{set\PYZus{}credentials\PYZus{}file}\PY{p}{(}\PY{n}{username}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{agilharrysr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{api\PYZus{}key}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zuCRUxfK09iTCU1aIGDE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{trace} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}
+              \PY{c+c1}{\PYZsh{} I\PYZsq{}m choosing BBL here because I know it\PYZsq{}s a unique key.}
+              \PY{n}{x} \PY{o}{=} \PY{n}{ny}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{ny}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{p}{)}
+          
+          \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+              \PY{n}{xaxis} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year Built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+              \PY{n}{yaxis} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Lots Built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{p}{)}
+          
+          \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{trace}\PY{p}{]}\PY{p}{,} \PY{n}{layout} \PY{o}{=} \PY{n}{layout}\PY{p}{)}
+          
+          \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ny\PYZhy{}year\PYZhy{}built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+High five! You successfully sent some data to your account on plotly. View your plot in your browser at https://plot.ly/\textasciitilde{}agilharrysr/0 or inside your plot.ly account where it is named 'ny-year-built'
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}115}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    Something looks off... You're going to have to deal with this imperfect
+data to answer this first question.
+
+But first: some notes on pandas. Pandas dataframes are a different beast
+than R dataframes, here are some tips to help you get up to speed:
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Hello all, here are some pandas tips to help you guys through this
+homework:
+
+\href{https://pandas.pydata.org/pandas-docs/stable/indexing.html}{Indexing
+and Selecting}: .loc and .iloc are the analogs for base R subsetting, or
+filter() in dplyr
+
+\href{https://pandas.pydata.org/pandas-docs/stable/groupby.html}{Group
+By}: This is the pandas analog to group\_by() and the appended function
+the analog to summarize(). Try out a few examples of this, and display
+the results in Jupyter. Take note of what's happening to the indexes,
+you'll notice that they'll become hierarchical. I personally find this
+more of a burden than a help, and this sort of hierarchical indexing
+leads to a fundamentally different experience compared to R dataframes.
+Once you perform an aggregation, try running the resulting hierarchical
+datafrome through a
+\href{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.reset_index.html}{reset\_index()}.
+
+\href{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.reset_index.html}{Reset\_index}:
+I personally find the hierarchical indexes more of a burden than a help,
+and this sort of hierarchical indexing leads to a fundamentally
+different experience compared to R dataframes. reset\_index() is a way
+of restoring a dataframe to a flatter index style. Grouping is where
+you'll notice it the most, but it's also useful when you filter data,
+and in a few other split-apply-combine workflows. With pandas indexes
+are more meaningful, so use this if you start getting unexpected
+results.
+
+Indexes are more important in Pandas than in R. If you delve deeper into
+the using python for data science, you'll begin to see the benefits in
+many places (despite the personal gripes I highlighted above.) One place
+these indexes come in handy is with time series data. The pandas docs
+have a
+\href{http://pandas.pydata.org/pandas-docs/stable/timeseries.html}{huge
+section} on datetime indexing. In particular, check out
+\href{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.resample.html}{resample},
+which provides time series specific aggregation.
+
+\href{https://pandas.pydata.org/pandas-docs/stable/merging.html}{Merging,
+joining, and concatenation}: There's some overlap between these
+different types of merges, so use this as your guide. Concat is a single
+function that replaces cbind and rbind in R, and the results are driven
+by the indexes. Read through these examples to get a feel on how these
+are performed, but you will have to manage your indexes when you're
+using these functions. Merges are fairly similar to merges in R,
+similarly mapping to SQL joins.
+
+Apply: This is explained in the "group by" section linked above. These
+are your analogs to the plyr library in R. Take note of the lambda
+syntax used here, these are anonymous functions in python. Rather than
+predefining a custom function, you can just define it inline using
+lambda.
+
+Browse through the other sections for some other specifics, in
+particular reshaping and categorical data (pandas' answer to factors.)
+Pandas can take a while to get used to, but it is a pretty strong
+framework that makes more advanced functions easier once you get used to
+it. Rolling functions for example follow logically from the apply
+workflow (and led to the best google results ever when I first tried to
+find this out and googled "pandas rolling")
+
+Google Wes Mckinney's book "Python for Data Analysis," which is a
+cookbook style intro to pandas. It's an O'Reilly book that should be
+pretty available out there.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{Question}\label{question}
+
+After a few building collapses, the City of New York is going to begin
+investigating older buildings for safety. The city is particularly
+worried about buildings that were unusually tall when they were built,
+since best-practices for safety hadn't yet been determined. Create a
+graph that shows how many buildings of a certain number of floors were
+built in each year (note: you may want to use a log scale for the number
+of buildings). Find a strategy to bin buildings (It should be clear
+20-29-story buildings, 30-39-story buildings, and 40-49-story buildings
+were first built in large numbers, but does it make sense to continue in
+this way as you get taller?)
+
+    \subsubsection{Response (Small
+Multiples)}\label{response-small-multiples}
+
+This graph needs to visualize 3 dimensions; year, buildings, and number
+of floors. A heatmap is a possible candidate for this question, however
+it may be difficult for most users to quickly grasp the information. For
+this reason I will use the concept of small multiples as a solution to
+this question. Data will be binned by multiples of ten (up to 50) based
+on the number of floors. There are not many buildings having more than
+50 floors, therefore the final bin will contain buildings with more than
+50 floors. The bins will be placed on separate bar charts and clustered
+on a single image below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{c+c1}{\PYZsh{} bin 1: Up to 10 floors}
+          \PY{n}{lte10} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ny}\PY{o}{.}\PY{n}{loc}\PY{p}{[} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10} \PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{lte10}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte10}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{lte10}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte10}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte10}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lte10}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte10}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{trace1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+              \PY{n}{x} \PY{o}{=} \PY{n}{lte10}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{lte10}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+              \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}
+          \PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} bin 2: 11 to 20 floors}
+          \PY{n}{lte1120} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ny}\PY{o}{.}\PY{n}{loc}\PY{p}{[} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{10}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)} \PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{lte1120}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte1120}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{lte1120}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte1120}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte1120}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lte1120}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte1120}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+              \PY{c+c1}{\PYZsh{} I\PYZsq{}m choosing BBL here because I know it\PYZsq{}s a unique key.}
+              \PY{n}{x} \PY{o}{=} \PY{n}{lte1120}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{lte1120}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+              \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}
+          \PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} bin 3: 21 to 30 floors}
+          \PY{n}{lte2130} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ny}\PY{o}{.}\PY{n}{loc}\PY{p}{[} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{20}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{30}\PY{p}{)} \PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{lte2130}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte2130}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{lte2130}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte2130}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte2130}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lte2130}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte2130}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{trace3}\PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+              \PY{c+c1}{\PYZsh{} I\PYZsq{}m choosing BBL here because I know it\PYZsq{}s a unique key.}
+              \PY{n}{x} \PY{o}{=} \PY{n}{lte2130}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{lte2130}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+              \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}
+          \PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} bin 4: 31 to 40 floors}
+          \PY{n}{lte3140} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ny}\PY{o}{.}\PY{n}{loc}\PY{p}{[} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{30}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)} \PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{lte3140}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte3140}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{lte3140}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte3140}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte3140}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lte3140}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte3140}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{trace4} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+              \PY{c+c1}{\PYZsh{} I\PYZsq{}m choosing BBL here because I know it\PYZsq{}s a unique key.}
+              \PY{n}{x} \PY{o}{=} \PY{n}{lte3140}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{lte3140}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+              \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}
+          \PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} bin 5: 41 to 50 floors}
+          \PY{n}{lte4150} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ny}\PY{o}{.}\PY{n}{loc}\PY{p}{[} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{40}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)} \PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{lte4150}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte4150}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{lte4150}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lte4150}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte4150}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lte4150}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{lte4150}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{trace5} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+              \PY{c+c1}{\PYZsh{} I\PYZsq{}m choosing BBL here because I know it\PYZsq{}s a unique key.}
+              \PY{n}{x} \PY{o}{=} \PY{n}{lte4150}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{lte4150}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+              \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}
+          \PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} bin 6: more than 50 floors}
+          \PY{n}{gt50} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{ny}\PY{o}{.}\PY{n}{loc}\PY{p}{[} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50} \PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{gt50}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{gt50}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{gt50}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{gt50}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{gt50}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{gt50}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{gt50}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{trace6} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+              \PY{c+c1}{\PYZsh{} I\PYZsq{}m choosing BBL here because I know it\PYZsq{}s a unique key.}
+              \PY{n}{x} \PY{o}{=} \PY{n}{gt50}\PY{o}{.}\PY{n}{index}\PY{p}{,}
+              \PY{n}{y} \PY{o}{=} \PY{n}{gt50}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogNumBuildings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+              \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}
+          \PY{p}{)}
+          
+           \PY{c+c1}{\PYZsh{} set up clusters}
+          \PY{n}{fig} \PY{o}{=} \PY{n}{tools}\PY{o}{.}\PY{n}{make\PYZus{}subplots}\PY{p}{(}\PY{n}{rows}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{cols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} 
+                                    \PY{n}{subplot\PYZus{}titles}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1 \PYZhy{} 10 Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11 \PYZhy{} 20 Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{21 \PYZhy{} 30 Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{31 \PYZhy{} 40 Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{41 \PYZhy{} 50 Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greater Than 50 Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{append\PYZus{}trace}\PY{p}{(}\PY{n}{trace1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{append\PYZus{}trace}\PY{p}{(}\PY{n}{trace2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{append\PYZus{}trace}\PY{p}{(}\PY{n}{trace3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{append\PYZus{}trace}\PY{p}{(}\PY{n}{trace4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{append\PYZus{}trace}\PY{p}{(}\PY{n}{trace5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{append\PYZus{}trace}\PY{p}{(}\PY{n}{trace6}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+          
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Building Sizes by Year: Number of Floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yaxis1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log(\PYZsh{} of Buildings)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yaxis2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yaxis3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yaxis4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log(\PYZsh{} of Buildings)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yaxis5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yaxis6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n+nb}{range}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xaxis5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year Built}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ny\PYZhy{}year\PYZhy{}built\PYZhy{}floors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This is the format of your plot grid:
+[ (1,1) x1,y1 ]  [ (1,2) x2,y2 ]  [ (1,3) x3,y3 ]
+[ (2,1) x4,y4 ]  [ (2,2) x5,y5 ]  [ (2,3) x6,y6 ]
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}116}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    \subsection{Part 2: Datashader}\label{part-2-datashader}
+
+Datashader is a library from Anaconda that does away with the need for
+binning data. It takes in all of your datapoints, and based on the
+canvas and range returns a pixel-by-pixel calculations to come up with
+the best representation of the data. In short, this completely
+eliminates the need for binning your data.
+
+As an example, lets continue with our question above and look at a 2D
+histogram of YearBuilt vs NumFloors:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{yearbins} \PY{o}{=} \PY{l+m+mi}{200}
+        \PY{n}{floorbins} \PY{o}{=} \PY{l+m+mi}{200}
+        
+        \PY{n}{yearBuiltCut} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yearbins}\PY{p}{)}\PY{p}{)}
+        \PY{n}{numFloorsCut} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{floorbins}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{xlabels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yearbins}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ylabels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{floorbins}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{data} \PY{o}{=} \PY{p}{[}
+            \PY{n}{go}\PY{o}{.}\PY{n}{Heatmap}\PY{p}{(}\PY{n}{z} \PY{o}{=} \PY{n}{ny}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{numFloorsCut}\PY{p}{,} \PY{n}{yearBuiltCut}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BBL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                      \PY{n}{colorscale} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greens}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{n}{xlabels}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{ylabels}\PY{p}{)}
+        \PY{p}{]}
+        
+        \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datashader\PYZhy{}2d\PYZhy{}hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <plotly.tools.PlotlyDisplay object>
+\end{Verbatim}
+            
+    This shows us the distribution, but it's subject to some biases
+discussed in the Anaconda notebook
+\href{https://anaconda.org/jbednar/plotting_pitfalls/notebook}{Plotting
+Perils}.
+
+Here is what the same plot would look like in datashader:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{cvs} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{Canvas}\PY{p}{(}\PY{l+m+mi}{800}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{n}{x\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+                                         \PY{n}{y\PYZus{}range} \PY{o}{=} \PY{p}{(}\PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{agg} \PY{o}{=} \PY{n}{cvs}\PY{o}{.}\PY{n}{points}\PY{p}{(}\PY{n}{ny}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YearBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NumFloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{view} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shade}\PY{p}{(}\PY{n}{agg}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{n}{cm}\PY{p}{(}\PY{n}{Greys9}\PY{p}{)}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{export}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{spread}\PY{p}{(}\PY{n}{view}\PY{p}{,} \PY{n}{px}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yearvsnumfloors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}21}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    That's technically just a scatterplot, but the points are smartly placed
+and colored to mimic what one gets in a heatmap. Based on the pixel
+size, it will either display individual points, or will color the points
+of denser regions.
+
+Datashader really shines when looking at geographic information. Here
+are the latitudes and longitudes of our dataset plotted out, giving us a
+map of the city colored by density of structures:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{NewYorkCity}   \PY{o}{=} \PY{p}{(}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mf}{74.29}\PY{p}{,}  \PY{o}{\PYZhy{}}\PY{l+m+mf}{73.69}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{40.49}\PY{p}{,} \PY{l+m+mf}{40.92}\PY{p}{)}\PY{p}{)}
+         \PY{n}{cvs} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{Canvas}\PY{p}{(}\PY{l+m+mi}{700}\PY{p}{,} \PY{l+m+mi}{700}\PY{p}{,} \PY{o}{*}\PY{n}{NewYorkCity}\PY{p}{)}
+         \PY{n}{agg} \PY{o}{=} \PY{n}{cvs}\PY{o}{.}\PY{n}{points}\PY{p}{(}\PY{n}{ny}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{view} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shade}\PY{p}{(}\PY{n}{agg}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{n}{cm}\PY{p}{(}\PY{n}{inferno}\PY{p}{)}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{export}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{spread}\PY{p}{(}\PY{n}{view}\PY{p}{,} \PY{n}{px}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{firery}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}22}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Interestingly, since we're looking at structures, the large buildings of
+Manhattan show up as less dense on the map. The densest areas measured
+by number of lots would be single or multi family townhomes.
+
+Unfortunately, Datashader doesn't have the best documentation. Browse
+through the examples from their
+\href{https://github.com/bokeh/datashader/tree/master/examples}{github
+repo}. I would focus on the
+\href{https://anaconda.org/jbednar/pipeline/notebook}{visualization
+pipeline} and the \href{https://anaconda.org/jbednar/census/notebook}{US
+Census} Example for the question below.
+\href{https://www.youtube.com/watch?v=6m3CFbKmK_c}{This talk} also
+provides a nice background for datashader. Feel free to use my samples
+as templates as well when you work on this problem.
+
+\subsubsection{Question}\label{question}
+
+You work for a real estate developer and are researching underbuilt
+areas of the city. After looking in the
+\href{https://www1.nyc.gov/assets/planning/download/pdf/data-maps/open-data/pluto_datadictionary.pdf?v=17v1_1}{Pluto
+data dictionary}, you've discovered that all tax assessments consist of
+two parts: The assessment of the land and assessment of the structure.
+You reason that there should be a correlation between these two values:
+more valuable land will have more valuable structures on them (more
+valuable in this case refers not just to a mansion vs a bungalow, but an
+apartment tower vs a single family home). Deviations from the norm could
+represent underbuilt or overbuilt areas of the city. You also recently
+read a really cool blog post about
+\href{http://www.joshuastevens.net/cartography/make-a-bivariate-choropleth-map/}{bivariate
+choropleth maps}, and think the technique could be used for this
+problem.
+
+Datashader is really cool, but it's not that great at labeling your
+visualization. Don't worry about providing a legend, but provide a quick
+explanation as to which areas of the city are overbuilt, which areas are
+underbuilt, and which areas are built in a way that's properly
+correlated with their land value.
+
+    \subsubsection{Response}\label{response}
+
+I will use the steps outlined in the above article on creating bivariate
+choropleth maps. Please note that the results will vary depending the
+classification strategy. I used a simple classification strategy where
+the standard deviation of the land value is compared with the standard
+deviation of the structure value. Having a high land value and low
+structure value is considered underbuilt. The opposite is considered
+overbuilt and if they are more or less the same, it is considered
+normal.
+
+On the map below, white is considered normal, blue is considered
+overbuilt, and red is considered underbuilt.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{c+c1}{\PYZsh{} new dataframe for necessesary data.}
+          \PY{n}{shader\PYZus{}df} \PY{o}{=} \PY{n}{ny}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessTot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} calculate the value of the structures}
+          \PY{n}{shader\PYZus{}df} \PY{o}{=} \PY{n}{shader\PYZus{}df}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{AssessStructure} \PY{o}{=} \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessTot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} normalize the data using min\PYZhy{}max normalization}
+          \PY{n}{shader\PYZus{}df}\PY{o}{=}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{o}{\PYZhy{}}\PY{n}{shader\PYZus{}df}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{shader\PYZus{}df}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{shader\PYZus{}df}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} load coordinates}
+          \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{ny}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} classifiy data}
+          \PY{n}{sdStructure} \PY{o}{=} \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+          \PY{n}{sdLand} \PY{o}{=} \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+          \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{normal}\PY{l+s+s2}{\PYZdq{}}
+          
+          \PY{n}{shader\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{sdStructure} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{sdLand}\PY{p}{)}\PY{p}{)} \PY{o}{|}
+                        \PY{p}{(}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1.5} \PY{o}{*} \PY{n}{sdStructure} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{1.5} \PY{o}{*} \PY{n}{sdLand}\PY{p}{)}\PY{p}{)} \PY{o}{|}
+                        \PY{p}{(}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sdStructure} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sdLand}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{underBuilt}\PY{l+s+s2}{\PYZdq{}}
+          
+          \PY{n}{shader\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{sdStructure} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{sdLand}\PY{p}{)}\PY{p}{)} \PY{o}{|}
+                        \PY{p}{(}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{1.5} \PY{o}{*} \PY{n}{sdStructure} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mf}{1.5} \PY{o}{*} \PY{n}{sdLand}\PY{p}{)}\PY{p}{)} \PY{o}{|}
+                        \PY{p}{(}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessStructure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sdStructure} \PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AssessLand}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sdLand}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{overBuilt}\PY{l+s+s2}{\PYZdq{}}
+          \PY{c+c1}{\PYZsh{} datashader requires a categorical type for categorical data classification}
+          \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{shader\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{NewYorkCity}   \PY{o}{=} \PY{p}{(}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{l+m+mf}{74.29}\PY{p}{,}  \PY{o}{\PYZhy{}}\PY{l+m+mf}{73.69}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mf}{40.49}\PY{p}{,} \PY{l+m+mf}{40.92}\PY{p}{)}\PY{p}{)}
+          \PY{n}{cvs} \PY{o}{=} \PY{n}{ds}\PY{o}{.}\PY{n}{Canvas}\PY{p}{(}\PY{l+m+mi}{700}\PY{p}{,} \PY{l+m+mi}{700}\PY{p}{,} \PY{o}{*}\PY{n}{NewYorkCity}\PY{p}{)}
+          \PY{n}{agg} \PY{o}{=} \PY{n}{cvs}\PY{o}{.}\PY{n}{points}\PY{p}{(}\PY{n}{shader\PYZus{}df}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ds}\PY{o}{.}\PY{n}{count\PYZus{}cat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}              
+          \PY{n}{view} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shade}\PY{p}{(}\PY{n}{agg}\PY{p}{,} \PY{n}{color\PYZus{}key}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{overBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{underBuilt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{export}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{spread}\PY{p}{(}\PY{n}{view}\PY{p}{,} \PY{n}{px}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{real\PYZus{}estate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}119}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
