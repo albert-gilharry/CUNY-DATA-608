@@ -141,7 +141,6 @@ def update_graph2(select_boro, select_spc):
         '&$where=spc_common="' + select_spc + '" and boroname="' + select_boro + '"' +\
         '&$group=steward,health,boroname').replace(' ', '%20')
     
-    print(soql_url)
     dfAll = pd.read_json(soql_url)
     
     for health in dfAll['health'].unique():
@@ -170,4 +169,4 @@ def update_graph2(select_boro, select_spc):
     }
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(host='0.0.0.0', port = 8050, threaded=True)
