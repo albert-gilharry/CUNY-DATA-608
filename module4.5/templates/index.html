@@ -1,0 +1,136 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/datatables.min.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}"/>
+</head>
+  <body>
+	<div style="display: none;" id="loading-overlay"></div>
+	<div style="display: none;" id="loading">
+		<span> 
+			<div><span style="width:200px;top: -35px;position: relative;" id="loadInfo"></span>
+			<div class="progress" style="width:200px;margin-top: -25px;">
+				<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; min-width:0px;color:#3c3c3c;">
+				Working...
+				</div>
+			</div>
+			</div>
+		</span>
+	</div>
+    <div class="container">
+		<div class="header" align="center">
+			<h3 class="text-muted">CUNY DATA608 Assignment 4.5: <span style="color:#000;">Flask API</span></h3>
+		</div>
+		<br />
+		<div class="alert alert-success" style="display:none;">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+		  <strong>Success!</strong> <span id="successText"></span>
+		</div>
+		<div class="alert alert-danger" id="mainError" style="display:none;">
+			  <strong>Alert!</strong> <span id="mainErrorText"></span>
+		</div>
+		
+		<div class="panel panel-primary">
+		<div class="panel-heading">Intro</div>
+			<div class="panel-body">
+				The purpose of this assignment is to create a REST API using the Flask framework to pull data from the New York City tree census located at 
+				<a href = "https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh">https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh</a>. This data is collected by volunteers across the city, and is meant to catalog information about every single tree in the city.
+				<br /><br />
+				I decided to create an API that will return data for trees adjacent to sidewalks. You may pull data based on two criterias:
+				
+				<ul>
+					<li>Trees in which there were noticeable damages to the adjacent sidewalk flags. Data on these trees may be accessed by running the app and visiting <a href = "http://localhost:5000/trees/sidewalk/Damage" target="_blank">http://localhost:5000/trees/sidewalk/Damage</a>
+					</li>
+					<li>Trees in which there were no noticeable damages to the adjacent sidewalk flags. Data on these trees may be accessed by running the app and visiting <a href = "http://localhost:5000/trees/sidewalk/NoDamage" target="_blank">http://localhost:5000/trees/sidewalk/NoDamage</a>
+					</li>
+				</ul>
+				
+				Please note that the data will be returned in <a href="https://www.json.org/" target = "_blank">JSON</a> format. Also, there is an optional parameter that may be added to the end of the above URL to set the number of records you would like returned. The default is 1000 records. For example, <a href = "http://localhost:5000/trees/sidewalk/Damage/2000" target="_blank">http://localhost:5000/trees/sidewalk/Damage/2000</a> will return the 2000 trees that were adjacent to damaged sidewalks.
+				
+				<br /><br />
+				The examples below use this API retrieve the data in JSON format and display the results in interactive <a href="https://datatables.net/" target="_blank">jQuery Data Tables</a>
+			</div>	
+		</div>
+					
+		<div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="panel panel-primary">
+					<div class="panel-heading">Damaged Sidewalks Example: <br /> http://localhost:5000/trees/sidewalk/Damage</div>
+						<div class="panel-body">
+							<table id="damageTable" width="100%" class="table dataTable">
+								 <thead>
+									<tr>
+										<th>TreeID</th>
+										<th width="25%">Name</th>
+										<th>Damaged?</th>
+										<th>Latitude</th>
+										<th>Longitude</th>
+										<th>Zipcode</th>
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>TreeID</th>
+										<th>Name</th>
+										<th>Damaged?</th>
+										<th>Latitude</th>
+										<th>Longitude</th>
+										<th>Zipcode</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>	
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="panel panel-primary">
+					<div class="panel-heading">Undamaged Sidewalks Example: <br /> http://localhost:5000/trees/sidewalk/NoDamage</div>
+						<div class="panel-body">
+							<table id="nodamageTable" width="100%" class="table dataTable">
+								 <thead>
+									<tr>
+										<th>TreeID</th>
+										<th width="25%">Borough</th>
+										<th>Damaged?</th>
+										<th>Latitude</th>
+										<th>Longitude</th>
+										<th>Zipcode</th>
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>TreeID</th>
+										<th>Borough</th>
+										<th>Damaged?</th>
+										<th>Latitude</th>
+										<th>Longitude</th>
+										<th>Zipcode</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>	
+					</div>
+				</div>
+			</div>				
+		</div>
+		<br />
+		<br />
+		<footer class="footer">
+			<p>Submitted by Albert Gilharry</p>
+		</footer>
+    </div>
+	
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/datatables.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

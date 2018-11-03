@@ -1,0 +1,191 @@
+#tickerValue {
+	font-size: 20px;
+	font-weight: bold;
+	color: #0c6d1c;
+	height: 50px;
+	border: 2px solid #000;
+	vertical-align: middle;
+	text-align: center;
+	padding: 5px;
+	width:100%;
+}
+
+#closeQuantity {
+	font-size: 20px;
+	font-weight: bold;
+	color: #6842f4;
+	height: 50px;
+	border: 2px solid #000;
+	vertical-align: middle;
+	text-align: center;
+	padding: 5px;
+}
+
+#closeValue {
+	font-size: 20px;
+	font-weight: bold;
+	color: #0c6d1c;
+	height: 50px;
+	border: 2px solid #000;
+	vertical-align: middle;
+	text-align: center;
+	padding: 5px;
+}
+
+#loading-overlay {
+	background: radial-gradient(ellipse closest-corner at 50% 50% , rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%) repeat scroll 0 0 transparent;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 9999999;
+}
+#loading {
+	background: url(/static/images/bg.png) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	height: 200px;
+	left: 50%;
+	margin-left: -140px;
+	margin-top: -88.5px;
+	position: fixed;
+	text-align: center;
+	top: 50%;
+	width: 280px;
+	z-index: 9999999;
+}
+#loading:after {
+	background: url(/static/images/spinner.gif) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	content: " ";
+	display: block;
+	height: 32px;
+	left: 50%;
+	margin-left: -16px;
+	margin-top: -16px;
+	position: absolute;
+	top: 68px;
+	width: 32px;
+  
+}
+#loading span {
+	color: #3c3c3c !important;
+	font-weight: bold;
+}
+#loading span {
+	display: inline-block;
+	position: relative;
+	top: 123px;
+}
+#tradeDialog,#closePositionDialog,#blotterDialog,#plDialog{z-index:9999;}
+
+#eqTable{
+	border-top: 1px solid #111;
+	border-bottom: 1px solid #111;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.dataTables_filter{
+	margin-bottom: 10px;
+}
+
+table.dataTable tbody tr {
+	cursor: pointer;
+}
+
+.visual-modal{
+	width: 950px !important;
+}
+
+#plot #vwapPlot #execPlot #tpplPlot, #cashPlot{
+	height: 340px;
+	width: 510px;
+}
+
+.plot-img{
+	height: 100%;
+	width: 100%;
+	border: 1px solid #000;
+}
+
+.bottom-margin{
+	margin-bottom:10px;
+}
+
+.summary{
+	color:#337ab7;
+}
+
+.jconfirm-box{
+	width: 475px;
+}
+
+.jconfirm-content{
+	overflow:hidden !important;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #FFF !important;
+}
+
+.navbar-inverse {
+	background-color: #307040 !important;
+	border-color: #080808 !important;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #bdac12;
+	font-weight: bold;
+	-webkit-text-stroke: 0.5px black;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	font-size:18px;
+	border-right: 1px solid #d0ffb0
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #257dd4;
+    border-color: #307040;
+    font-size: 24px;
+	font-weight: bold;
+	-webkit-text-stroke: 1.0px black;
+}
+
+.panel-primary {
+    border-color: #257dd4;
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #a59506;
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #ccc;
+    background-color: #eee;
+}
+
+.modal-title {
+    margin: 0;
+    line-height: 1.42857143;
+    color: #fff;
+    font-size: 26px;
+    -webkit-text-stroke: 1.5px black;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .7;
+}
+
+.container {
+    width: 95%;
+}
