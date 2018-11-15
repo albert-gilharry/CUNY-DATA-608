@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Module 5: Part 3 - Albert Gilharry</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+	
+	
+		<div class="container" style = "width:95%;">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Intro</div>
+				<div class="panel-body">
+					The purpose of this assignment is to use the created REST API from Assignment 4.5. to provide visualization of choice. The API pulled data from the New York City tree census located at 
+					<a href = "https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh">https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh</a>.
+					<br /><br />
+					I am using my API to provide a bar chart of the number of damaged or undamaged side walk near trees in each borough. You can select the integrity of the sidewalk below and be presented with the respective plot.
+					
+					This app uses D3.js  and plotly to pull the data from the API and create the graphs. It uses Bootstrap for design. 
+					Please note the accompanying Flask APP must be running at <a href = "http://localhost:5000" target="_blank">http://localhost:5000</a>.
+					<br /><br />
+					
+					For performance purposes only the first 1000 records are pulled!
+				</div>	
+			</div>
+			
+			<div class="panel panel-primary">
+				<div class="panel-heading"> Select Sidewalk Status: &nbsp;&nbsp;
+					<select id='sidewalk-status' style = "color:#000000;" onchange="updatePlot()">
+						<option value = "Damage" selected = "selected">Damaged</option>
+						<option value = "NoDamage">Undamaged</option>
+					</select>
+				</div>
+				<div class="panel-body">
+					<div id='plot'></div>
+				</div>	
+			</div>
+			
+			
+			
+			
+		<footer class="footer">
+			<p>Submitted by Albert Gilharry</p>
+		</footer>
+		</div>
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript" src="./part3.js"></script>
+    </body>
+</html>

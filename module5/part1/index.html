@@ -1,0 +1,105 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<style>
+td, th {
+    padding: 5;
+}
+</style>
+</head>
+  <body>
+	<div style="display: none;" id="loading-overlay"></div>
+	<div style="display: none;" id="loading">
+		<span> 
+			<div><span style="width:200px;top: -35px;position: relative;" id="loadInfo"></span>
+			<div class="progress" style="width:200px;margin-top: -25px;">
+				<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; min-width:0px;color:#3c3c3c;">
+				Working...
+				</div>
+			</div>
+			</div>
+		</span>
+	</div>
+    <div class="container" style = "width:95%;">
+		<div class="header" align="center">
+			<h3 class="text-muted">CUNY DATA608 Assignment 5 Part 1: <span style="color:#000;">JavaScript</span></h3>
+		</div>
+		
+		<br />
+					
+		<div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div class="row" style = "height: 60px;">
+									<div class="col-sm-3">
+										<strong>Question 1:</strong>
+									</div>
+									<div class="col-sm-9">							
+										Create a function to reverse any word that you type in.	This can be typed into either an input
+box or an alert box, and then print the result in a box or on the webpage.				
+									</div>
+							</div>
+						 </div>
+						<div class="panel-body">
+
+							<div class="row" style="padding:18px;">
+								<div class="col-sm-3">
+									<strong>Enter Word</strong>:
+								</div>
+								<div class="col-sm-9">							
+									<input type="text" name="word" id="word" class="form-control" />								
+								</div>
+							</div>
+						</div>
+						<div align = "right" class="panel-footer">							
+							<button type="button" class="btn btn-success" id="reverse">Reverse</button>					
+						</div>						
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div class="row" style = "height: 60px;">
+									<div class="col-sm-3">
+										<strong>Question 2:</strong>
+									</div>
+									<div class="col-sm-9">							
+										Create a function that takes a number, and prints a table with the first 20 multiples of the number, in order 5x4.			
+									</div>
+							</div>
+						</div>
+						<div class="panel-body" id = "multiTable">
+							<div class="row" style="padding:18px;">
+								<div class="col-sm-3">
+									<strong>Enter Number: <br /> (1 - 100)</strong>:
+								</div>
+								<div class="col-sm-9">							
+									<input type="text" name="num" id="num" class="form-control" />								
+								</div>
+							</div>
+						</div>	
+						<div align = "right" class="panel-footer">							
+							<button type="button" class="btn btn-success" id="multiples">Enter</button>					
+						</div>	
+					</div>
+				</div>
+			</div>				
+		</div>
+		<br />
+		<br />
+		<footer class="footer">
+			<p>Submitted by Albert Gilharry</p>
+		</footer>
+    </div>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+	<script src="./part1.js"></script>
+</body>
+</html>
