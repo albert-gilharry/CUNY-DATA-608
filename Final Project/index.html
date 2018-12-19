@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DATA 608 | Final Project | Home</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="dist/css/skin-blue.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div style="display: none;" id="loading-overlay"></div>
+	<div style="display: none;" id="loading">
+		<span> 
+			<div><span style="width:200px;top: -35px;position: relative;" id="loadInfo"></span>
+			<div class="progress" style="width:200px;margin-top: -25px;">
+				<div class="progress-bar progress-bar-striped active progressText" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; min-width:0px;color:#3c3c3c;">
+				Working...
+				</div>
+			</div>
+			</div>
+		</span>
+	</div>
+<div class="wrapper">
+
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container" style = "width:100%;">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand"><i class="fas fa-globe-africa"></i><b> AID</b></a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+			<li class="active"><a href="index.html">Home</a></li>
+            <li><a href="donors.html">Donors <span class="sr-only">(current)</span></a></li>
+            <li><a href="recipients.html">Recipients</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+              <!-- Menu Toggle Button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- The user image in the navbar-->
+                <img src="dist/img/avatar.png" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">Albert Gilharry</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+                  <img src="dist/img/avatar.png" class="img-circle" alt="User Image">
+
+                  <p>
+                    Albert Gilharry - Software Engineer/Data Scientist
+                  </p>
+                </li>
+                <!-- Menu Body -->
+               
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="http://rpubs.com/Albert_Gilharry/" class="btn btn-default btn-flat" target="_blank">RPubs</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="https://github.com/albert-gilharry" class="btn btn-default btn-flat" target="_blank">Github</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-custom-menu -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container" style = "width:100%;">
+      <!-- Content Header (Page header) -->
+      
+      <!-- Main content -->
+      <section class="content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary" style = "border-left: 1px solid #afa2a2; border-bottom: 1px solid #afa2a2;">
+					<div class="box-header with-border">
+					  <h3 class="box-title">Purpose</h3>
+
+					  <div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					  </div>
+					</div>
+					<div class="box-body">
+						This Web portal is in service to my Final Project for DATA 608 (Knowledge & Visual Analytics), a core course in CUNY's Master of Science in Data Science program. You may access specific dashboards by clicking on the "Donors" and "Recipients" item in the top menu.
+					</div>
+					<!-- /.box-body -->
+					
+				</div>
+				<!-- /.box -->
+				
+				<div class="box box-primary" style = "border-left: 1px solid #afa2a2; border-bottom: 1px solid #afa2a2;">
+					<div class="box-header with-border">
+					  <h3 class="box-title">Context</h3>
+
+					  <div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					  </div>
+					</div>
+					<div class="box-body">
+						The issues surrounding development aid is always pressing in the geo-political arena, perhaps now more than ever before. Its impacts (both positive and negative) affect both the recipient and donor countries, and they go beyond dollars and cents. These issues include accountability (by both donor and recipients), humanitarian, diplomatic, social, and even immigration issues, to name a few. Recently the United States of America announced cuts to the budget of its long standing USAID, the world’s leading international development agency. The debates on whether international aid really help these developing countries and whether countries should donate their own money for the benefits of the citizens of other countries could go on forever. Recently, President Donald Trump has threatened to cut foreign aid to Central American countries (Guatemala, Honduras and El Salvador) from which migrant caravans travel to the US to seek asylum. People react differently to these realities based on experiences, fear, and beliefs. How many of these reactions are based on facts/data? How many US and European citizens know just how much of their tax dollars goes towards aid in Central America and other developing countries? How many of the Central Americans and citizens of other developing countries actually know the magnitude of the aid given to them by other countries. <br /><br />Obviously the concept of foreign aid is a very complex and delicate matter, but knowing these figures could empower the citizens of poor developing nations and the more prosperous donor nations to demand accountability on the part their leaders. Equipping the layperson with such information will improve their communications among themselves and with their leaders. It is in this light that I am proposing to build a dashboard where information on the disbursements of development aid across the globe can be easily accessible. Obviously, these data do not stand on their own. One must have an appreciation of history to understand the issues surrounding development aid and its possible ties to other issues such as international chain migration. 
+					</div>
+					<!-- /.box-body -->
+					
+				</div>
+				
+				<div class="box box-primary" style = "border-left: 1px solid #afa2a2; border-bottom: 1px solid #afa2a2;">
+					<div class="box-header with-border">
+					  <h3 class="box-title">Uitility</h3>
+
+					  <div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					  </div>
+					</div>
+					<div class="box-body">
+						<strong>The portal will allow users to answer the following questions:</strong><br /><br />
+						
+						<strong>Donors</strong>
+						<br />
+						•	How much do we donate in a given year to a particular country? <br />
+						•	How does our contribution compare to that of other donating countries. <br />
+						•	What percentage of our GDP do we provide as aid? <br />
+						•	What is the distribution of our aid across the globe? <br />
+						•	How are our aid distributed across regions in the world? <br />
+						•	What types of aid do we provide and what does their distribution looks like? <br />
+						•	What are the top countries we provide aid? <br /><br />
+						
+						<strong>Recipients</strong><br />
+						
+						•	How much aid do we receive from a specific country?<br />
+						•	How many countries provide aid to us?<br />
+						•	How much aid do we receive per capita?<br />
+						•	Historically what aid have we received?<br />
+						•	How does our aid compare to other countries?<br />
+
+					</div>
+					<!-- /.box-body -->
+					
+				</div>
+				
+				<div class="box box-primary" style = "border-left: 1px solid #afa2a2; border-bottom: 1px solid #afa2a2;">
+					<div class="box-header with-border">
+					  <h3 class="box-title">Data</h3>
+
+					  <div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					  </div>
+					</div>
+					<div class="box-body">
+						The funding data was sourced from the Organisation for Economic Cooperation and Development’s (OECD) iLibrary. Specifically, their Official Development Assistance (ODA) detailed aid statistics that provides comprehensive data on the volume, origin, and types of foreign aid and other resource flows from donor countries to recipient countries. The ODA data are provided by OECD members of the Development Assistance Committee (DAC). More information may be found on their website at <a href ="https://www.oecd-ilibrary.org">https://www.oecd-ilibrary.org</a>.  A link to the data can be found at <a href = "https://stats.oecd.org/viewhtml.aspx?datasetcode=TABLE2A&lang=en">https://stats.oecd.org/viewhtml.aspx?datasetcode=TABLE2A&lang=en</a>. The data is freely accessible to the public and is cited as specified on their website. <br /> <br />
+						
+The GDP and Per Capita data will be sourced from the World Bank’s Open Data portal. This is also a publicly available data set and is  cited as specified. More information on the terms and conditions of the usage of their data sets can be found here. The data set can be found here.
+
+<br />
+<br />
+The main data set contains 299,988 records. The first records are shown below: <br /><br />
+
+								<table id="sampleTable" width="100%" class="table dataTable table-bordered">
+								 <thead>
+									<tr>
+										<th>AIDTYPE</th>
+										<th >Aid type</th>
+										<th>Amount type</th>
+										<th>DATATYPE</th>
+										<th>DONOR</th>
+										<th>Flags</th>
+										<th>Part</th>
+										<th>PowerCode</th>
+										<th>Recipient</th>
+										<th>Reference Period</th>
+										<th>Unit</th>
+										<th>Value</th>
+										<th>Year</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+
+						<br />
+<p>	
+<strong>Data Source: </strong>				
+<!-- Data citation 1 -->
+OECD (2018), "Detailed aid statistics:&nbsp;ODA Official development assistance: disbursements", 
+<i>OECD International Development Statistics</i> (database),
+<a href="https://doi.org/10.1787/data-00069-en" title="">https://doi.org/10.1787/data-00069-en</a> (accessed on 19 December 2018).</p>
+
+
+					</div>
+					<!-- /.box-body -->
+					
+				</div>
+				
+				
+			</div>
+		</div>
+		<!-- /.row -->
+		  
+		
+		  
+         
+      <!-- /.content -->
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 1.0.0
+      </div>
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/d3-array.v2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<!-- custom script to create plots and manage interface. -->
+<script src="index.js"></script>
+</body>
+</html>
